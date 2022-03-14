@@ -1,0 +1,89 @@
+<html>
+<head>
+  <title>HOME</title>
+  <link rel="icon" type="image/x-icon" href="asset/applogo.png" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+   <div id="loader"></div>
+   <div style="display:none;" id="myDiv" class="animate-bottom">
+
+  <div id="login_div" class="main-div">
+    <h3>CTU-TC Tour Guide Administrator</h3>
+    <input type="email" placeholder="Email..." id="email_field" />
+    <input type="password" placeholder="Password..." id="password_field" />
+
+    <button onclick="login()">Login Account</button>
+  </div>
+    <div id="user_div" class="loggedin-div">
+      <div class="topnav">
+        <a ><img src="asset/applogo.png"></a>
+        <a class="active">TOUR GUIDE APP ADMIN PANEL</a>
+        <a class="user2" onclick="logout()">Logout</a>
+        <a class="active2">|</a>
+        <a class="user" id="user_para" onclick="profile()" >User</a>
+      </div>
+    
+    <div class="leftnav">
+      <a class="tite">DASHBOARD</a>
+      <div class="bttn" onclick="DataChange3()">
+        <p id="total" class="total">0</p>
+        <p class="name">TOTAL</p>
+      </div>
+      <div class="bttn" onclick="DataChange()">
+        <p id="total2" class="total2">0</p>
+        <p class="name" >DONE</p>
+      </div>
+      <div class="bttn" onclick="DataChange2()">
+        <p id="total3"  class="total3">0</p>
+        <p class="name">UNDONE</p>
+      </div>
+      <br>
+      <br>
+      <a class="tite" >APP DATA CONFIGURATIONS</a>
+      <div class="bttn2" onclick="BF_Page()">
+        <p id="config1"  class="config1">+</p>
+        <p class="name">BUILDINGS AND FACILITIES LIST</p>
+    </div>
+    </div>
+
+    <div class="headtitle"><p id="Htitle">APP QUERIES & REQUEST</p></div>
+    <div class="container1">
+      <div class="container">
+          <div id="entries" class="row">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAw8hxwZPZt9CUNlebU0vswi252hFwm7bs",
+      authDomain: "ctu-tc-campus-tour-guide.firebaseapp.com",
+      databaseURL: "https://ctu-tc-campus-tour-guide-default-rtdb.firebaseio.com",
+      projectId: "ctu-tc-campus-tour-guide",
+      storageBucket: "ctu-tc-campus-tour-guide.appspot.com",
+      messagingSenderId: "1085138120817",
+      appId: "1:1085138120817:web:403154d3573d7b1ab2abd0",
+      measurementId: "G-H6HTWMJ6EP"
+    };
+    firebase.initializeApp(config);
+
+  </script>
+  <script src="index.js"></script>
+  
+  <script>
+
+
+  </script>
+
+</body>
+</html>

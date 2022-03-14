@@ -1,0 +1,131 @@
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="asset/applogo.png" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROFILE</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+    <div id="loader"></div>
+
+    <div style="display:none;" id="myDiv" class="animate-bottom">
+        
+    <div class="main-div">  
+        <div class="prof">
+            <p>ADMIN INFORMATION</p>
+        </div>
+        <div class="profcontainer">
+      
+            <div class="container">
+                <br>
+                <article>
+                
+                    <form id="update_entry">
+                        
+
+                        <label for="lname">Name:</label><br>
+                        <input type="text" id="name" name="name" value = "Loading Info..."><br>
+                        <label for="lname">Lastname:</label><br>
+                        <input type="text" id="lname" name="lastname" value = "Loading Info..."><br>
+                        <label for="lname">Email:</label><br>
+                        <input type="email" id="Email" name="Email" disabled><br>
+                        
+
+                    </form>
+
+                    <div class="text-left">
+                        <button id="update">Update</button>
+                        <button onclick="home()">Go back</button>
+                    </div>
+                    
+                </article>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script src="//cdn.ckeditor.com/4.5.10/standard/ckeditor.js"></script>
+
+      <script src="index.js"></script>
+
+</body>
+
+<script>
+
+
+    // firebase config
+    var config = {
+        apiKey: "AIzaSyAw8hxwZPZt9CUNlebU0vswi252hFwm7bs",
+        authDomain: "ctu-tc-campus-tour-guide.firebaseapp.com",
+        databaseURL: "https://ctu-tc-campus-tour-guide-default-rtdb.firebaseio.com",
+        projectId: "ctu-tc-campus-tour-guide",
+        storageBucket: "ctu-tc-campus-tour-guide.appspot.com",
+        messagingSenderId: "1085138120817",
+        appId: "1:1085138120817:web:403154d3573d7b1ab2abd0",
+        measurementId: "G-H6HTWMJ6EP"
+    };
+    
+    firebase.initializeApp(config);
+
+
+    /////////////////////////////////////
+
+    var adminID;
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) { 
+            if (user !== null) 
+            {
+            const email = user.email;
+            adminID = user.uid;
+            console.log(adminID);
+            $('#update_entry [name="Email"]').val(email);
+            firebase.database().ref('/Admin/' + adminID).once('value').then(function(snapshot) 
+            {
+               admin = snapshot.val();
+               
+               $('#update_entry [name="name"]').val(admin.name);
+               $('#update_entry [name="lastname"]').val(admin.lastname);
+            });
+            } 
+            else 
+            {
+            
+            }
+        var Accnt = firebase.database().ref('Admin').child(adminID);
+       $('#update').click(function(){
+                if(confirm('Update Profile')){
+                        const name = document.getElementById("name").value;
+                        const lname = document.getElementById("lname").value;
+                        const Email = document.getElementById("Email").value;
+                        Accnt.update
+                        ({
+                            'name': name,
+                            'lastname': lname,
+                            'email': Email
+                        });
+                          
+                }});
+
+                }});
+
+    /*************\
+     * Utilities *
+    \*************/
+    
+   
+               
+</script>
+
+</html>
